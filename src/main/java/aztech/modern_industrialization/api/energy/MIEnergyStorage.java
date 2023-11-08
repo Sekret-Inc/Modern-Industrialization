@@ -35,14 +35,11 @@ public interface MIEnergyStorage extends EnergyStorage {
      */
     @ApiStatus.NonExtendable
     default boolean canConnect(String cableTier) {
-        return switch (cableTier) {
-        case "lv" -> canConnect(CableTier.LV);
-        case "mv" -> canConnect(CableTier.MV);
-        case "hv" -> canConnect(CableTier.HV);
-        case "ev" -> canConnect(CableTier.EV);
-        case "superconductor" -> canConnect(CableTier.SUPERCONDUCTOR);
-        default -> false;
-        };
+        var tier = CableTierRegistry.getByName(cableTier);
+        if (tier == null) {
+            return false;
+        }
+        return canConnect(tier);
     }
 
     interface NoExtract extends MIEnergyStorage {

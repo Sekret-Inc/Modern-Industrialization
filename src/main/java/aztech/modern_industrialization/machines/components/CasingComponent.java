@@ -25,6 +25,7 @@ package aztech.modern_industrialization.machines.components;
 
 import aztech.modern_industrialization.MIBlock;
 import aztech.modern_industrialization.api.energy.CableTier;
+import aztech.modern_industrialization.api.energy.CableTierRegistry;
 import aztech.modern_industrialization.machines.IComponent;
 import aztech.modern_industrialization.machines.MachineBlockEntity;
 import aztech.modern_industrialization.machines.models.MachineCasing;
@@ -50,15 +51,6 @@ public class CasingComponent implements IComponent {
 
     private CableTier tierCasing;
     private final CableTier defaultCasing;
-    public static final BiMap<Block, CableTier> blockCasing = HashBiMap.create();
-
-    static {
-        blockCasing.put(MIBlock.BASIC_MACHINE_HULL.asBlock(), CableTier.LV);
-        blockCasing.put(MIBlock.ADVANCED_MACHINE_HULL.asBlock(), CableTier.MV);
-        blockCasing.put(MIBlock.TURBO_MACHINE_HULL.asBlock(), CableTier.HV);
-        blockCasing.put(MIBlock.HIGHLY_ADVANCED_MACHINE_HULL.asBlock(), CableTier.EV);
-        blockCasing.put(MIBlock.QUANTUM_MACHINE_HULL.asBlock(), CableTier.SUPERCONDUCTOR);
-    }
 
     public CasingComponent(CableTier defaultCasing) {
         this.defaultCasing = defaultCasing;
@@ -73,7 +65,7 @@ public class CasingComponent implements IComponent {
 
     @Override
     public void readNbt(CompoundTag tag) {
-        tierCasing = CableTier.getTier(tag.getString("casing"));
+        tierCasing = CableTierRegistry.getByName(tag.getString("casing"));
         if (tierCasing == null) {
             tierCasing = defaultCasing;
         }
@@ -87,14 +79,14 @@ public class CasingComponent implements IComponent {
 
     @Override
     public void readClientNbt(CompoundTag tag) {
-        tierCasing = CableTier.getTier(tag.getString("casing"));
+        tierCasing = CableTierRegistry.getByName(tag.getString("casing"));
         if (tierCasing == null) {
             tierCasing = defaultCasing;
         }
     }
 
     public void dropCasing(Level world, BlockPos pos) {
-        ItemStack stack = new ItemStack(blockCasing.inverse().get(tierCasing).asItem(), 1);
+        ItemStack stack = new ItemStack(tierCasing.machineHull.asItem(), 1);
         Containers.dropItemStack(world, pos.getX(), pos.getY(), pos.getZ(), stack);
     }
 
@@ -127,7 +119,7 @@ public class CasingComponent implements IComponent {
             return; // no sound for LV
         }
 
-        var casingState = blockCasing.inverse().get(tierCasing).defaultBlockState();
+        var casingState = tierCasing.machineHull.defaultBlockState();
         var group = casingState.getSoundType();
         var sound = group.getBreakSound();
         be.getLevel().playSound(null, be.getBlockPos(), sound, SoundSource.BLOCKS, (group.getVolume() + 1.0F) / 4.0F, group.getPitch() * 0.8F);
@@ -136,14 +128,14 @@ public class CasingComponent implements IComponent {
     @Nullable
     private static CableTier getCasingTier(Item item) {
         if (item instanceof BlockItem blockItem) {
-            return blockCasing.get(blockItem.getBlock());
+            return CableTierRegistry.hullToTier.get(blockItem.getBlock());
         }
         return null;
     }
 
     public ItemStack getDrop() {
         if (tierCasing != defaultCasing) {
-            return new ItemStack(blockCasing.inverse().get(tierCasing).asItem(), 1);
+            return new ItemStack(tierCasing.machineHull.asItem(), 1);
         }
         return ItemStack.EMPTY;
     }

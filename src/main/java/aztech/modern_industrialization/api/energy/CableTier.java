@@ -24,42 +24,40 @@
 package aztech.modern_industrialization.api.energy;
 
 import aztech.modern_industrialization.MIText;
+import aztech.modern_industrialization.definition.BlockDefinition;
+import aztech.modern_industrialization.machines.models.MachineCasing;
+import aztech.modern_industrialization.machines.models.MachineCasings;
 import net.minecraft.network.chat.Component;
-import org.jetbrains.annotations.ApiStatus;
+import net.minecraft.world.level.block.Block;
 
-/**
- * You can use the enum constants just fine but everything else might change when we add an API to register cable tiers!
- */
-@ApiStatus.Experimental
-public enum CableTier {
-    LV("LV", "lv", 32, MIText.CableTierLV),
-    MV("MV", "mv", 32 * 4, MIText.CableTierMV),
-    HV("HV", "hv", 32 * 4 * 8, MIText.CableTierHV),
-    EV("EV", "ev", 32 * 4 * 8 * 8, MIText.CableTierEV),
-    SUPERCONDUCTOR("Superconductor", "superconductor", 128000000, MIText.CableTierSuperconductor);
+public class CableTier implements Comparable<CableTier> {
 
     public final String englishName;
     public final String name;
     public final long eu;
+    public final MachineCasing machineCasing;
+    public final String machineHullPath;
+    public final Block machineHull;
+    public boolean isAE2Compatible = false;
 
     public final String translationKey;
     public final Component englishNameComponent;
 
-    CableTier(String englishName, String name, long eu, MIText englishNameComponent) {
+    // TODO(Despacito696969): Move turbines and hatches here
+    public CableTier(String englishName, String name, long eu, MIText englishNameComponent, BlockDefinition<Block> machineHullDefinintion) {
         this.englishName = englishName;
         this.name = name;
         this.eu = eu;
         this.translationKey = "text.modern_industrialization.cable_tier_" + name;
         this.englishNameComponent = englishNameComponent.text();
+        this.machineCasing = MachineCasings.create(name);
+        this.machineHull = machineHullDefinintion.asBlock();
+        this.machineHullPath = machineHullDefinintion.path();
     }
 
-    public static CableTier getByName(String tier) {
-        for (CableTier cableTier : values()) {
-            if (cableTier.name.equals(tier)) {
-                return cableTier;
-            }
-        }
-        return null;
+    public CableTier setAE2Compatible() {
+        isAE2Compatible = true;
+        return this;
     }
 
     /**
@@ -79,12 +77,8 @@ public enum CableTier {
         return name;
     }
 
-    public static final CableTier getTier(String name) {
-        for (CableTier tier : CableTier.values()) {
-            if (tier.name.equals(name)) {
-                return tier;
-            }
-        }
-        return null;
+    @Override
+    public int compareTo(CableTier other) {
+        return Long.compare(eu, other.eu);
     }
 }

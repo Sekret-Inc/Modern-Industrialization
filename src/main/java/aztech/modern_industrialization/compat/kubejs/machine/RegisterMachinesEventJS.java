@@ -26,6 +26,7 @@ package aztech.modern_industrialization.compat.kubejs.machine;
 import static aztech.modern_industrialization.machines.init.SingleBlockCraftingMachines.*;
 
 import aztech.modern_industrialization.api.energy.CableTier;
+import aztech.modern_industrialization.api.energy.CableTierRegistry;
 import aztech.modern_industrialization.compat.rei.machines.ReiMachineRecipes;
 import aztech.modern_industrialization.inventory.SlotPositions;
 import aztech.modern_industrialization.machines.BEP;
@@ -258,7 +259,7 @@ public class RegisterMachinesEventJS extends EventJS implements ShapeTemplateHel
                 englishName, internalName,
                 bep -> new GeneratorMachineBlockEntity(bep,
                         internalName,
-                        CableTier.getByName(cableTierName),
+                        CableTierRegistry.getByNameOrThrow(cableTierName),
                         energyCapacity,
                         fluidStorageCapacity,
                         componentBuilder.build()),

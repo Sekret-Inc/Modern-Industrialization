@@ -23,7 +23,7 @@
  */
 package aztech.modern_industrialization.machines.blockentities;
 
-import aztech.modern_industrialization.api.energy.CableTier;
+import aztech.modern_industrialization.api.energy.CableTierRegistry;
 import aztech.modern_industrialization.api.energy.EnergyApi;
 import aztech.modern_industrialization.api.energy.MIEnergyStorage;
 import aztech.modern_industrialization.api.machine.holder.EnergyComponentHolder;
@@ -52,7 +52,7 @@ public class ElectricCraftingMachineBlockEntity extends AbstractCraftingMachineB
             MachineGuiParameters guiParams, EnergyBar.Parameters energyBarParams, ProgressBar.Parameters progressBarParams,
             RecipeEfficiencyBar.Parameters efficiencyBarParams, MachineTier tier, long euCapacity) {
         super(bep, recipeType, inventory, guiParams, progressBarParams, tier);
-        this.casing = new CasingComponent(CableTier.LV);
+        this.casing = new CasingComponent(CableTierRegistry.defaultTier);
         this.upgrades = new UpgradeComponent();
         this.energy = new EnergyComponent(this, casing::getEuCapacity);
         this.insertable = energy.buildInsertable(cableTier -> this.casing.canInsertEu(cableTier));

@@ -80,12 +80,6 @@ public class MIBlock {
             .withBlockRegistrationEvent(TrashCanBlock::onRegister);
 
     // Other
-    public static final BlockDefinition<Block> BASIC_MACHINE_HULL = block("Basic Machine Hull", "basic_machine_hull");
-    public static final BlockDefinition<Block> ADVANCED_MACHINE_HULL = block("Advanced Machine Hull", "advanced_machine_hull");
-    public static final BlockDefinition<Block> TURBO_MACHINE_HULL = block("Turbo Machine Hull", "turbo_machine_hull");
-    public static final BlockDefinition<Block> HIGHLY_ADVANCED_MACHINE_HULL = block("Highly Advanced Machine Hull", "highly_advanced_machine_hull");
-    public static final BlockDefinition<Block> QUANTUM_MACHINE_HULL = block("Quantum Machine Hull", "quantum_machine_hull", BlockDefinitionParams.defaultStone().resistance(6000f));
-
     public static final BlockDefinition<Block> FUSION_CHAMBER = block("Fusion Chamber", "fusion_chamber");
     public static final BlockDefinition<Block> INDUSTRIAL_TNT = blockExplosive("Industrial TNT", "industrial_tnt");
     public static final BlockDefinition<Block> NUKE = blockExplosive("Nuke", "nuke");

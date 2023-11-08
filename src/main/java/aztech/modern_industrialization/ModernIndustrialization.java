@@ -24,6 +24,7 @@
 package aztech.modern_industrialization;
 
 import aztech.modern_industrialization.api.FluidFuelRegistry;
+import aztech.modern_industrialization.api.energy.CableTierRegistry;
 import aztech.modern_industrialization.blocks.WrenchableBlockEntity;
 import aztech.modern_industrialization.blocks.forgehammer.ForgeHammerScreenHandler;
 import aztech.modern_industrialization.blocks.storage.barrel.BarrelBlock;
@@ -85,6 +86,11 @@ public class ModernIndustrialization {
             new MIIdentifier("forge_hammer"), new MenuType<>(ForgeHammerScreenHandler::new, FeatureFlags.VANILLA_SET));
 
     public static void initialize() {
+        CableTierRegistry.init();
+        // Here we put the KubeJS thingy()
+        // KubeJSProxy.instance.fireCableTiersEvent();
+        CableTierRegistry.finishInitialization();
+
         Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB, TAB_KEY, FabricItemGroup.builder()
                 .title(MIText.ModernIndustrialization.text())
                 .icon(() -> MIBlock.FORGE_HAMMER.asItem().getDefaultInstance())

@@ -23,8 +23,8 @@
  */
 package aztech.modern_industrialization.machines.guicomponents;
 
-import aztech.modern_industrialization.MIBlock;
 import aztech.modern_industrialization.MIText;
+import aztech.modern_industrialization.api.energy.CableTierRegistry;
 import aztech.modern_industrialization.inventory.HackySlot;
 import aztech.modern_industrialization.inventory.SlotGroup;
 import aztech.modern_industrialization.machines.GuiComponents;
@@ -122,8 +122,8 @@ public class SlotPanel {
         UPGRADES(SlotGroup.UPGRADES, 64, stack -> UpgradeComponent.getExtraEu(stack.getItem()) > 0, 0, 80, MIText.AcceptsUpgrades),
         // Assumes that the default casing is always the LV casing for now
         CASINGS(SlotGroup.CASING, 1, stack -> {
-            if (stack.getItem() instanceof BlockItem block && block != MIBlock.BASIC_MACHINE_HULL.asItem()) {
-                return CasingComponent.blockCasing.containsKey(block.getBlock());
+            if (stack.getItem() instanceof BlockItem block && block != CableTierRegistry.defaultTier.machineHull.asItem()) {
+                return CableTierRegistry.hullToTier.containsKey(block.getBlock());
             }
             return false;
         }, 18, 80, MIText.AcceptsMachineHull),

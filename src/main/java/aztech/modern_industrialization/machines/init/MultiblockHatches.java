@@ -24,6 +24,7 @@
 package aztech.modern_industrialization.machines.init;
 
 import aztech.modern_industrialization.api.energy.CableTier;
+import aztech.modern_industrialization.api.energy.CableTierRegistry;
 import aztech.modern_industrialization.inventory.ConfigurableFluidStack;
 import aztech.modern_industrialization.inventory.ConfigurableItemStack;
 import aztech.modern_industrialization.inventory.MIInventory;
@@ -43,23 +44,25 @@ import java.util.List;
 
 public class MultiblockHatches {
     public static void init() {
+        var MV_Casing = CableTierRegistry.getByNameOrThrow("mv").machineCasing;
+        var HV_Casing = CableTierRegistry.getByNameOrThrow("hv").machineCasing;
+        var EV_Casing = CableTierRegistry.getByNameOrThrow("ev").machineCasing;
+
         registerItemHatches("Bronze", "bronze", MachineCasings.BRONZE, 1, 1, 80, 40);
         registerItemHatches("Steel", "steel", MachineCasings.STEEL, 2, 1, 80, 30);
-        registerItemHatches("Advanced", "advanced", MachineCasings.MV, 2, 2, 71, 30);
-        registerItemHatches("Turbo", "turbo", MachineCasings.HV, 3, 3, 62, 21);
-        registerItemHatches("Highly Advanced", "highly_advanced", MachineCasings.EV, 3, 5, 44, 18);
+        registerItemHatches("Advanced", "advanced", MV_Casing, 2, 2, 71, 30);
+        registerItemHatches("Turbo", "turbo", HV_Casing, 3, 3, 62, 21);
+        registerItemHatches("Highly Advanced", "highly_advanced", EV_Casing, 3, 5, 44, 18);
 
         registerFluidHatches("Bronze", "bronze", MachineCasings.BRONZE, 4);
         registerFluidHatches("Steel", "steel", MachineCasings.STEEL, 8);
-        registerFluidHatches("Advanced", "advanced", MachineCasings.MV, 16);
-        registerFluidHatches("Turbo", "turbo", MachineCasings.HV, 32);
-        registerFluidHatches("Highly Advanced", "highly_advanced", MachineCasings.EV, 64);
+        registerFluidHatches("Advanced", "advanced", MV_Casing, 16);
+        registerFluidHatches("Turbo", "turbo", HV_Casing, 32);
+        registerFluidHatches("Highly Advanced", "highly_advanced", EV_Casing, 64);
 
-        registerEnergyHatches(CableTier.LV);
-        registerEnergyHatches(CableTier.MV);
-        registerEnergyHatches(CableTier.HV);
-        registerEnergyHatches(CableTier.EV);
-        registerEnergyHatches(CableTier.SUPERCONDUCTOR);
+        for (var tier : CableTierRegistry.tierList) {
+            registerEnergyHatches(tier);
+        }
 
         MachineRegistrationHelper.registerMachine(
                 "Nuclear Item Hatch",

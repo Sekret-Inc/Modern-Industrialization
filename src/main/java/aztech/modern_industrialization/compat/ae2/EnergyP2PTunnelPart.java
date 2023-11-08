@@ -126,7 +126,7 @@ public class EnergyP2PTunnelPart extends CapabilityP2PTunnelPart<EnergyP2PTunnel
 
         @Override
         public boolean canConnect(CableTier cableTier) {
-            return cableTier == CableTier.SUPERCONDUCTOR;
+            return cableTier.isAE2Compatible;
         }
     }
 
@@ -163,7 +163,7 @@ public class EnergyP2PTunnelPart extends CapabilityP2PTunnelPart<EnergyP2PTunnel
 
         @Override
         public boolean canConnect(CableTier cableTier) {
-            return cableTier == CableTier.SUPERCONDUCTOR;
+            return cableTier.isAE2Compatible;
         }
     }
 }

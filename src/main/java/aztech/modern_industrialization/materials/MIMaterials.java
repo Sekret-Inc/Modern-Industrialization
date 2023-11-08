@@ -29,6 +29,7 @@ import static aztech.modern_industrialization.materials.set.MaterialSet.*;
 
 import aztech.modern_industrialization.MIItem;
 import aztech.modern_industrialization.api.energy.CableTier;
+import aztech.modern_industrialization.api.energy.CableTierRegistry;
 import aztech.modern_industrialization.compat.kubejs.KubeJSProxy;
 import aztech.modern_industrialization.machines.init.MIMachineRecipeTypes;
 import aztech.modern_industrialization.materials.part.*;
@@ -172,6 +173,12 @@ public class MIMaterials {
     }
 
     static {
+        CableTier LV_Tier = CableTierRegistry.getByNameOrThrow("lv");
+        CableTier MV_Tier = CableTierRegistry.getByNameOrThrow("mv");
+        CableTier HV_Tier = CableTierRegistry.getByNameOrThrow("hv");
+        CableTier EV_Tier = CableTierRegistry.getByNameOrThrow("ev");
+        CableTier SUPERCONDUCTOR_Tier = CableTierRegistry.getByNameOrThrow("superconductor");
+
         GOLD = MaterialRegistry.addMaterial(addVanillaMetal(true,
                 new MaterialBuilder("Gold", "gold")
                         .set(MaterialProperty.SET, SHINY)
@@ -198,7 +205,7 @@ public class MIMaterials {
                         .addParts(BOLT, BLADE, RING, ROTOR, GEAR, ROD, CURVED_PLATE, DOUBLE_INGOT, DUST, LARGE_PLATE, NUGGET, PLATE, TINY_DUST)
                         .addParts(WIRE)
                         .addParts(FINE_WIRE)
-                        .addParts(CABLE.of(CableTier.LV))
+                        .addParts(CABLE.of(LV_Tier))
                         .addParts(DRILL_HEAD, DRILL))
                 .cancelRecipes("macerator/ore_to_raw", "forge_hammer/ore_to_raw_metal",
                         "forge_hammer/ore_to_raw_metal_with_tool", "forge_hammer/ore_to_dust_with_tool"));
@@ -246,7 +253,7 @@ public class MIMaterials {
                         .set(MaterialProperty.SET, STONE)
                         .set(MaterialProperty.MEAN_RGB, 0xd20000)
                         .set(MaterialProperty.HARDNESS, SOFT)
-                        .addParts(TINY_DUST, CRUSHED_DUST, BATTERY.of(CableTier.LV)).addMaterialItemParts(MaterialItemPart.external(DUST, "minecraft:redstone", "minecraft:redstone"))
+                        .addParts(TINY_DUST, CRUSHED_DUST, BATTERY.of(LV_Tier)).addMaterialItemParts(MaterialItemPart.external(DUST, "minecraft:redstone", "minecraft:redstone"))
                         .addMaterialItemParts(MaterialItemPart.external(BLOCK, "#c:redstone_blocks", "minecraft:redstone_block"))
                         .addMaterialItemParts(MaterialItemPart.external(ORE, "#c:redstone_ores", "minecraft:redstone_ore"))
                         .addMaterialItemParts(MaterialItemPart.external(ORE_DEEPSLATE, "#c:redstone_ores", "minecraft:deepslate_redstone_ore"))
@@ -319,7 +326,7 @@ public class MIMaterials {
                         .addParts(BOLT, BLADE, RING, ROTOR, GEAR, ROD, CURVED_PLATE, DOUBLE_INGOT, DUST, INGOT, LARGE_PLATE, NUGGET, PLATE, TINY_DUST)
                         .addParts(ORE.ofAll(16, 9, 64, MaterialOreSet.IRON))
                         .addParts(WIRE).addParts(RAW_METAL.ofAll(MaterialRawSet.GOLD))
-                        .addParts(BLOCK.of(MaterialBlockSet.COPPER)).addParts(CABLE.of(CableTier.LV))
+                        .addParts(BLOCK.of(MaterialBlockSet.COPPER)).addParts(CABLE.of(LV_Tier))
                         .addRecipes(ForgeHammerRecipes::apply, SmeltingRecipes::apply, StandardRecipes::apply));
 
         STEEL = MaterialRegistry.addMaterial(
@@ -350,7 +357,7 @@ public class MIMaterials {
                         .addParts(BOLT, BLADE, RING, ROTOR, GEAR, ROD, CURVED_PLATE, DOUBLE_INGOT, DUST, INGOT, LARGE_PLATE, NUGGET, PLATE, TINY_DUST)
                         .addParts(WIRE).addParts(BLOCK.of(MaterialBlockSet.GOLD)).addParts(MACHINE_CASING.of("Advanced Machine Casing", "advanced_machine_casing"))
                         .addParts(DRILL_HEAD, DRILL).addParts(MACHINE_CASING_SPECIAL.of("Frostproof Machine Casing", "frostproof_machine_casing")).addParts(TANK.of(16))
-                        .addParts(BARREL.of(512)).addParts(CABLE.of(CableTier.HV)).addRecipes(StandardRecipes::apply)
+                        .addParts(BARREL.of(512)).addParts(CABLE.of(HV_Tier)).addRecipes(StandardRecipes::apply)
                         .addRecipes(SmeltingRecipes::applyBlastFurnace));
 
         BAUXITE = MaterialRegistry.addMaterial(new MaterialBuilder("Bauxite", "bauxite")
@@ -398,7 +405,7 @@ public class MIMaterials {
                 .set(MaterialProperty.MEAN_RGB, 0xE39681)
                 .set(MaterialProperty.HARDNESS, SOFT)
                 .addParts(TINY_DUST, DUST, INGOT, DOUBLE_INGOT, PLATE, WIRE, NUGGET, WIRE_MAGNETIC).addParts(COIL)
-                .addParts(BLOCK.of(MaterialBlockSet.COPPER)).addParts(CABLE.of(CableTier.MV))
+                .addParts(BLOCK.of(MaterialBlockSet.COPPER)).addParts(CABLE.of(MV_Tier))
                 .addRecipes(StandardRecipes::apply, SmeltingRecipes::apply));
 
         ANTIMONY = MaterialRegistry.addMaterial(new MaterialBuilder("Antimony", "antimony")
@@ -421,7 +428,7 @@ public class MIMaterials {
                         .set(MaterialProperty.SET, SHINY)
                         .set(MaterialProperty.MEAN_RGB, 0xDCDCFF)
                         .set(MaterialProperty.HARDNESS, SOFT)
-                        .addParts(RAW_METAL.ofAll(MaterialRawSet.GOLD)).addParts(CABLE.of(CableTier.LV))
+                        .addParts(RAW_METAL.ofAll(MaterialRawSet.GOLD)).addParts(CABLE.of(LV_Tier))
                         .addParts(DOUBLE_INGOT, DUST, INGOT, NUGGET, PLATE, TINY_DUST, WIRE).addParts(BLOCK.of(MaterialBlockSet.GOLD))
                         .addRecipes(StandardRecipes::apply, SmeltingRecipes::apply));
 
@@ -431,7 +438,7 @@ public class MIMaterials {
                         .set(MaterialProperty.SET, STONE)
                         .set(MaterialProperty.MEAN_RGB, 0x071CB8)
                         .set(MaterialProperty.HARDNESS, SOFT).addParts(TINY_DUST, DUST).addParts(BLOCK.of(MaterialBlockSet.LAPIS))
-                        .addParts(BATTERY.of(CableTier.HV)).addRecipes(StandardRecipes::apply, SmeltingRecipes::apply));
+                        .addParts(BATTERY.of(HV_Tier)).addRecipes(StandardRecipes::apply, SmeltingRecipes::apply));
 
         SALT = MaterialRegistry.addMaterial(new MaterialBuilder("Salt", "salt")
                 .set(MaterialProperty.MAIN_PART, DUST)
@@ -461,7 +468,7 @@ public class MIMaterials {
                         .set(MaterialProperty.MEAN_RGB, 0xFFFF64)
                         .set(MaterialProperty.HARDNESS, SOFT)
                         .addParts(DOUBLE_INGOT, DUST, INGOT, NUGGET, PLATE, TINY_DUST).addParts(BLOCK.of(MaterialBlockSet.GOLD))
-                        .addParts(WIRE, FINE_WIRE).addParts(CABLE.of(CableTier.MV)).addRecipes(StandardRecipes::apply, SmeltingRecipes::apply)
+                        .addParts(WIRE, FINE_WIRE).addParts(CABLE.of(MV_Tier)).addRecipes(StandardRecipes::apply, SmeltingRecipes::apply)
         );
 
         SILICON = MaterialRegistry.addMaterial(new MaterialBuilder("Silicon", "silicon")
@@ -469,7 +476,7 @@ public class MIMaterials {
                 .set(MaterialProperty.MEAN_RGB, 0x3C3C50)
                 .set(MaterialProperty.HARDNESS, SOFT)
                 .addParts(ITEM_PURE_METAL)
-                .addParts(BLOCK.of(MaterialBlockSet.IRON)).addParts(N_DOPED_PLATE, P_DOPED_PLATE).addParts(PLATE, DOUBLE_INGOT, BATTERY.of(CableTier.MV))
+                .addParts(BLOCK.of(MaterialBlockSet.IRON)).addParts(N_DOPED_PLATE, P_DOPED_PLATE).addParts(PLATE, DOUBLE_INGOT, BATTERY.of(MV_Tier))
                 .addRecipes(StandardRecipes::apply, SmeltingRecipes::apply));
 
         STAINLESS_STEEL = MaterialRegistry.addMaterial(new MaterialBuilder("Stainless Steel", "stainless_steel")
@@ -533,7 +540,7 @@ public class MIMaterials {
                 .set(MaterialProperty.SET, SHINY)
                 .set(MaterialProperty.MEAN_RGB, 0xff924f)
                 .set(MaterialProperty.HARDNESS, SOFT).addParts(ITEM_PURE_METAL)
-                .addParts(BLOCK.of(MaterialBlockSet.COPPER)).addParts(PLATE, WIRE, DOUBLE_INGOT, HOT_INGOT).addParts(CABLE.of(CableTier.EV))
+                .addParts(BLOCK.of(MaterialBlockSet.COPPER)).addParts(PLATE, WIRE, DOUBLE_INGOT, HOT_INGOT).addParts(CABLE.of(EV_Tier))
                 .addRecipes(StandardRecipes::apply).addRecipes((ctx) -> SmeltingRecipes.applyBlastFurnace(ctx, false, 64)));
 
         URANIUM = MaterialRegistry.addMaterial(new MaterialBuilder("Uranium", "uranium")
@@ -597,7 +604,7 @@ public class MIMaterials {
                 .set(MaterialProperty.SET, SHINY)
                 .set(MaterialProperty.MEAN_RGB, 0xd701e7)
                 .set(MaterialProperty.HARDNESS, VERY_HARD).addParts(BLOCK.of(MaterialBlockSet.GOLD))
-                .addParts(ITEM_PURE_METAL).addParts(BATTERY.of(CableTier.SUPERCONDUCTOR)).addRecipes(StandardRecipes::apply)
+                .addParts(ITEM_PURE_METAL).addParts(BATTERY.of(SUPERCONDUCTOR_Tier)).addRecipes(StandardRecipes::apply)
                 .addRecipes((ctx) -> SmeltingRecipes.applyBlastFurnace(ctx, 128)));
 
         PLATINUM = MaterialRegistry.addMaterial(
@@ -606,7 +613,7 @@ public class MIMaterials {
                         .set(MaterialProperty.MEAN_RGB, 0xffe5ba)
                         .addParts(BLOCK.of(MaterialBlockSet.GOLD)).addParts(RAW_METAL.ofAll(MaterialRawSet.GOLD))
                         .addParts(ORE.of(MaterialOreSet.GOLD)).addParts(ITEM_PURE_METAL)
-                        .addParts(PLATE, DOUBLE_INGOT, WIRE, FINE_WIRE, HOT_INGOT).addParts(CABLE.of(CableTier.EV))
+                        .addParts(PLATE, DOUBLE_INGOT, WIRE, FINE_WIRE, HOT_INGOT).addParts(CABLE.of(EV_Tier))
                         .addRecipes((ctx) -> SmeltingRecipes.applyBlastFurnace(ctx, true, 128, 600)).addRecipes(StandardRecipes::apply)
                         .cancelRecipes("macerator/raw_metal"));
 
@@ -617,7 +624,7 @@ public class MIMaterials {
                         .set(MaterialProperty.HARDNESS, HARD)
                         .addParts(TINY_DUST, DUST, PLATE, INGOT, NUGGET, WIRE, DOUBLE_INGOT, HOT_INGOT).addParts(COIL)
                         .addParts(BLOCK.of(MaterialBlockSet.COPPER)).addRecipes((ctx) -> SmeltingRecipes.applyBlastFurnace(ctx, true, 32, 400))
-                        .addParts(CABLE.of(CableTier.HV)).addRecipes(StandardRecipes::apply));
+                        .addParts(CABLE.of(HV_Tier)).addRecipes(StandardRecipes::apply));
 
         IRIDIUM = MaterialRegistry.addMaterial(
                 new MaterialBuilder("Iridium", "iridium")
@@ -658,7 +665,7 @@ public class MIMaterials {
                         .set(MaterialProperty.SET, DULL)
                         .set(MaterialProperty.MEAN_RGB, 0x967224)
                         .set(MaterialProperty.HARDNESS, SOFT)
-                        .addParts(DUST, TINY_DUST, INGOT, PLATE, ROD, DOUBLE_INGOT, BATTERY.of(CableTier.EV))
+                        .addParts(DUST, TINY_DUST, INGOT, PLATE, ROD, DOUBLE_INGOT, BATTERY.of(EV_Tier))
                         .addParts(
                                 new PartTemplate("Control Rod", FUEL_ROD.key)
                                         .withRegister((partContext, part, itemPath1, itemId, itemTag, englishName) -> NuclearAbsorbable
@@ -689,7 +696,7 @@ public class MIMaterials {
                         .set(MaterialProperty.MEAN_RGB, 0x86e3ec)
                         .set(MaterialProperty.HARDNESS, HARD)
                         .addParts(TINY_DUST, DUST, PLATE, INGOT, NUGGET, WIRE, DOUBLE_INGOT, HOT_INGOT).addParts(COIL)
-                        .addParts(CABLE.of(CableTier.SUPERCONDUCTOR)).addRecipes(StandardRecipes::apply)
+                        .addParts(CABLE.of(SUPERCONDUCTOR_Tier)).addRecipes(StandardRecipes::apply)
                         .cancelRecipes("craft/cable", "packer/cable",
                                 "assembler/cable_synthetic_rubber",
                                 "assembler/cable_styrene_rubber"));

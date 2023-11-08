@@ -56,6 +56,7 @@ public enum MIText {
     Both("Both"),
     CableTierEV("Extreme Voltage"),
     CableTierHV("High Voltage"),
+    CableTierIV("Insane Voltage"),
     CableTierLV("Low Voltage"),
     CableTierMV("Medium Voltage"),
     CableTierSuperconductor("Superconductor"),

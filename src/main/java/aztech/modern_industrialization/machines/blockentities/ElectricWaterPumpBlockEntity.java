@@ -23,7 +23,7 @@
  */
 package aztech.modern_industrialization.machines.blockentities;
 
-import aztech.modern_industrialization.api.energy.CableTier;
+import aztech.modern_industrialization.api.energy.CableTierRegistry;
 import aztech.modern_industrialization.api.energy.EnergyApi;
 import aztech.modern_industrialization.api.energy.MIEnergyStorage;
 import aztech.modern_industrialization.api.machine.holder.EnergyComponentHolder;
@@ -48,7 +48,7 @@ public class ElectricWaterPumpBlockEntity extends AbstractWaterPumpBlockEntity i
                 Collections.singletonList(ConfigurableFluidStack.lockedOutputSlot(capacity, Fluids.WATER)), SlotPositions.empty(),
                 new SlotPositions.Builder().addSlot(OUTPUT_SLOT_X, OUTPUT_SLOT_Y).build());
         this.energy = new EnergyComponent(this, 3200);
-        this.insertable = energy.buildInsertable(tier -> tier == CableTier.LV);
+        this.insertable = energy.buildInsertable(tier -> tier == CableTierRegistry.defaultTier);
         registerGuiComponent(new EnergyBar.Server(new EnergyBar.Parameters(18, 32), energy::getEu, energy::getCapacity));
         this.registerComponents(energy);
         this.registerComponents(inventory);
