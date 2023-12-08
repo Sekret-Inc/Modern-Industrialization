@@ -41,6 +41,7 @@ public abstract class CableTierRegistry {
 
     public static void init() {
     }
+
     public static void finishInitialization() {
         CableTierRegistry.tierList.sort(Comparator.naturalOrder());
     }
