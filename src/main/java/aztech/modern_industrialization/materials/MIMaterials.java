@@ -173,6 +173,7 @@ public class MIMaterials {
     }
 
     static {
+        KubeJSProxy.instance.fireEnergyEvents();
         CableTier LV_Tier = CableTierRegistry.getByNameOrThrow("lv");
         CableTier MV_Tier = CableTierRegistry.getByNameOrThrow("mv");
         CableTier HV_Tier = CableTierRegistry.getByNameOrThrow("hv");

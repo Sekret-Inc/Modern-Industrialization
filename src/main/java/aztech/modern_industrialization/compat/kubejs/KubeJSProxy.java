@@ -34,6 +34,9 @@ public class KubeJSProxy {
     public void fireAddMaterialsEvent() {
     }
 
+    public void fireEnergyEvents() {
+    }
+
     public void fireModifyMaterialEvent(MaterialBuilder materialBuilder) {
     }
 
