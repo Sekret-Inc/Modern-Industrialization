@@ -23,8 +23,8 @@
  */
 package aztech.modern_industrialization.api.energy;
 
-import aztech.modern_industrialization.MIText;
 import aztech.modern_industrialization.definition.BlockDefinition;
+import aztech.modern_industrialization.definition.CableTierDefinition;
 import aztech.modern_industrialization.machines.models.MachineCasing;
 import aztech.modern_industrialization.machines.models.MachineCasings;
 import net.minecraft.network.chat.Component;
@@ -44,15 +44,15 @@ public class CableTier implements Comparable<CableTier> {
     public final Component englishNameComponent;
 
     // TODO(Despacito696969): Move turbines and hatches here?
-    public CableTier(String englishName, String name, long eu, String englishFullName, BlockDefinition<Block> machineHullDefinintion) {
+    public CableTier(String englishName, String id, long eu, String englishFullName, BlockDefinition<Block> machineHullDefinintion) {
         // This also registers text for language datagen
-        var englishNameComponent = new MIText.DynamicMIText("CableTier" + englishName, englishFullName);
+        new CableTierDefinition(englishFullName, englishName, id);
         this.englishName = englishName;
-        this.name = name;
+        this.name = id;
         this.eu = eu;
-        this.translationKey = "text.modern_industrialization.cable_tier_" + name;
-        this.englishNameComponent = englishNameComponent.text();
-        this.machineCasing = MachineCasings.create(name);
+        this.translationKey = "text." + aztech.modern_industrialization.ModernIndustrialization.MOD_ID + ".cable_tier_" + id;
+        this.englishNameComponent = Component.translatable(translationKey);
+        this.machineCasing = MachineCasings.create(id);
         this.machineHull = machineHullDefinintion.asBlock();
         this.machineHullPath = machineHullDefinintion.path();
     }

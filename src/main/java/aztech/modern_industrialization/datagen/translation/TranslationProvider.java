@@ -97,13 +97,6 @@ public final class TranslationProvider implements DataProvider {
             }
         }
 
-        for (var entry : MIText.DynamicMIText.values) {
-            addTranslation(entry.getTranslationKey(), entry.getEnglishText());
-            for (String additionalKey : entry.getAdditionalTranslationKey()) {
-                addTranslation(additionalKey, entry.getEnglishText());
-            }
-        }
-
         for (Field f : MIConfig.class.getFields()) {
             EnglishTranslation englishTranslation = f.getAnnotation(EnglishTranslation.class);
             if (englishTranslation != null) {
