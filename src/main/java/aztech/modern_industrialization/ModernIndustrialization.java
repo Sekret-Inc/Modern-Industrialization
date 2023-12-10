@@ -87,8 +87,7 @@ public class ModernIndustrialization {
 
     public static void initialize() {
         CableTierRegistry.init();
-        // Here we put the KubeJS thingy()
-        // KubeJSProxy.instance.fireCableTiersEvent();
+        KubeJSProxy.instance.fireEnergyEvents();
         CableTierRegistry.finishInitialization();
 
         Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB, TAB_KEY, FabricItemGroup.builder()

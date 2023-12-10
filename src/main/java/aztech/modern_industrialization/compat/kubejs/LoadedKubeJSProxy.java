@@ -23,8 +23,8 @@
  */
 package aztech.modern_industrialization.compat.kubejs;
 
-import aztech.modern_industrialization.compat.kubejs.energy.MIEnergyKubeJSEvents;
-import aztech.modern_industrialization.compat.kubejs.energy.ModifyEnergyTierEventJS;
+import aztech.modern_industrialization.compat.kubejs.energy.MICableTierKubeJSEvents;
+import aztech.modern_industrialization.compat.kubejs.energy.ModifyCableTiersEventJS;
 import aztech.modern_industrialization.compat.kubejs.machine.AddEbfTiersEventJS;
 import aztech.modern_industrialization.compat.kubejs.machine.AddMultiblockSlotsEventJS;
 import aztech.modern_industrialization.compat.kubejs.machine.MIMachineKubeJSEvents;
@@ -53,7 +53,7 @@ public class LoadedKubeJSProxy extends KubeJSProxy {
 
     @Override
     public void fireEnergyEvents() {
-        MIEnergyKubeJSEvents.MODIFY.post(new ModifyEnergyTierEventJS());
+        MICableTierKubeJSEvents.MODIFY.post(new ModifyCableTiersEventJS());
     }
 
     @Override

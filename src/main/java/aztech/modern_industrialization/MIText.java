@@ -281,6 +281,7 @@ public enum MIText {
         return Component.translatable(getTranslationKey(), args);
     }
 
+    // Because having to add basic translations by yourself when datagen exists is just stupid
     public static class DynamicMIText {
         public static ArrayList<DynamicMIText> values = new ArrayList<>();
         public final String name;
