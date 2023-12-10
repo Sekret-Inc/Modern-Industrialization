@@ -26,6 +26,7 @@ package aztech.modern_industrialization.datagen.translation;
 import aztech.modern_industrialization.MIConfig;
 import aztech.modern_industrialization.MIText;
 import aztech.modern_industrialization.MITooltips;
+import aztech.modern_industrialization.api.energy.CableTierRegistry;
 import aztech.modern_industrialization.compat.rei.machines.ReiMachineRecipes;
 import aztech.modern_industrialization.datagen.tag.TagsToGenerate;
 import aztech.modern_industrialization.definition.Definition;
@@ -90,6 +91,13 @@ public final class TranslationProvider implements DataProvider {
         addManualEntries();
 
         for (var entry : MIText.values()) {
+            addTranslation(entry.getTranslationKey(), entry.getEnglishText());
+            for (String additionalKey : entry.getAdditionalTranslationKey()) {
+                addTranslation(additionalKey, entry.getEnglishText());
+            }
+        }
+
+        for (var entry : MIText.DynamicMIText.values) {
             addTranslation(entry.getTranslationKey(), entry.getEnglishText());
             for (String additionalKey : entry.getAdditionalTranslationKey()) {
                 addTranslation(additionalKey, entry.getEnglishText());

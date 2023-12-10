@@ -20,12 +20,12 @@ public abstract class CableTierRegistry {
     static {
         tierList = new ArrayList<>();
         hullToTier = new HashMap<>();
-        addTier(new CableTier("LV", "lv", 32, MIText.CableTierLV, MIBlock.block("Basic Machine Hull", "basic_machine_hull")));
-        addTier(new CableTier("MV", "mv", 32 * 4, MIText.CableTierMV, MIBlock.block("Advanced Machine Hull", "advanced_machine_hull")));
-        addTier(new CableTier("HV", "hv", 32 * 4 * 8, MIText.CableTierHV, MIBlock.block("Turbo Machine Hull", "turbo_machine_hull")));
-        addTier(new CableTier("EV", "ev", 32 * 4 * 8 * 8, MIText.CableTierEV, MIBlock.block("Highly Advanced Machine Hull", "highly_advanced_machine_hull")));
-        addTier(new CableTier("IV", "iv", 32 * 4 * 8 * 8 * 8, MIText.CableTierIV, MIBlock.block("Ultra Advanced Machine Hull", "ultra_advanced_machine_hull")));
-        addTier(new CableTier("Superconductor", "superconductor", 128000000, MIText.CableTierSuperconductor, MIBlock.block("Quantum Machine Hull", "quantum_machine_hull", MIBlock.BlockDefinitionParams.defaultStone().resistance(6000f))).setAE2Compatible());
+        addTier(new CableTier("LV", "lv", 32, "Low Voltage", MIBlock.block("Basic Machine Hull", "basic_machine_hull")));
+        addTier(new CableTier("MV", "mv", 32 * 4, "Medium Voltage", MIBlock.block("Advanced Machine Hull", "advanced_machine_hull")));
+        addTier(new CableTier("HV", "hv", 32 * 4 * 8, "High Voltage", MIBlock.block("Turbo Machine Hull", "turbo_machine_hull")));
+        addTier(new CableTier("EV", "ev", 32 * 4 * 8 * 8, "Extreme Voltage", MIBlock.block("Highly Advanced Machine Hull", "highly_advanced_machine_hull")));
+        addTier(new CableTier("IV", "iv", 32 * 4 * 8 * 8 * 8, "Insane Voltage", MIBlock.block("Ultra Advanced Machine Hull", "ultra_advanced_machine_hull")));
+        addTier(new CableTier("Superconductor", "superconductor", 128000000, "Superconductor", MIBlock.block("Quantum Machine Hull", "quantum_machine_hull", MIBlock.BlockDefinitionParams.defaultStone().resistance(6000f))).setAE2Compatible());
     }
 
     public static void addTier(CableTier tier) {

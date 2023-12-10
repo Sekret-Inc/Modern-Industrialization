@@ -23,6 +23,7 @@
  */
 package aztech.modern_industrialization;
 
+import java.util.ArrayList;
 import java.util.List;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -54,12 +55,12 @@ public enum MIText {
     Blacklist("Blacklist mode enabled"),
     BookSubtitle("Technology For Newbies"),
     Both("Both"),
-    CableTierEV("Extreme Voltage"),
+    /*CableTierEV("Extreme Voltage"),
     CableTierHV("High Voltage"),
     CableTierIV("Insane Voltage"),
     CableTierLV("Low Voltage"),
     CableTierMV("Medium Voltage"),
-    CableTierSuperconductor("Superconductor"),
+    CableTierSuperconductor("Superconductor"),*/
     ChanceConsumption("Consumption Chance: %s %%"),
     ChanceProduction("Production Chance: %s %%"),
     ClickToDisable("Click to disable"),
@@ -280,4 +281,40 @@ public enum MIText {
         return Component.translatable(getTranslationKey(), args);
     }
 
+    public static class DynamicMIText {
+        public static ArrayList<DynamicMIText> values = new ArrayList<>();
+        public final String name;
+        public final String root;
+        public final String englishText;
+        private final List<String> additionalTranslationsKey;
+
+        public DynamicMIText(String name, String englishText, String... additionalTranslationKey) {
+            this.name = name;
+            this.root = "text." + aztech.modern_industrialization.ModernIndustrialization.MOD_ID;
+            this.englishText = englishText;
+            this.additionalTranslationsKey = List.of(additionalTranslationKey);
+
+            values.add(this);
+        }
+
+        public List<String> getAdditionalTranslationKey() {
+            return this.additionalTranslationsKey;
+        }
+
+        public String getEnglishText() {
+            return englishText;
+        }
+
+        public String getTranslationKey() {
+            return this.root + '.' + this.name;
+        }
+
+        public MutableComponent text() {
+            return Component.translatable(getTranslationKey());
+        }
+
+        public MutableComponent text(Object... args) {
+            return Component.translatable(getTranslationKey(), args);
+        }
+    }
 }

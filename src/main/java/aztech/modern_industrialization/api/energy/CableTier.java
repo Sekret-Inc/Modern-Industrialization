@@ -44,7 +44,8 @@ public class CableTier implements Comparable<CableTier> {
     public final Component englishNameComponent;
 
     // TODO(Despacito696969): Move turbines and hatches here
-    public CableTier(String englishName, String name, long eu, MIText englishNameComponent, BlockDefinition<Block> machineHullDefinintion) {
+    public CableTier(String englishName, String name, long eu, String englishFullName, BlockDefinition<Block> machineHullDefinintion) {
+        var englishNameComponent = new MIText.DynamicMIText("CableTier" + englishName, englishFullName);
         this.englishName = englishName;
         this.name = name;
         this.eu = eu;
