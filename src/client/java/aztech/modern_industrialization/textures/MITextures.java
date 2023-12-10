@@ -80,7 +80,8 @@ public final class MITextures {
         }
 
         for (var tier : CableTierRegistry.tierList) {
-            mtm.runAtEnd(() -> casingFromTexture(mtm, tier.name, mtm.getAssetAsTexture("modern_industrialization:textures/block/" + tier.machineHullPath + ".png")));
+            mtm.runAtEnd(() -> casingFromTexture(mtm,
+                    tier.name, mtm.getAssetAsTexture("modern_industrialization:textures/block/" + tier.machineHullPath + ".png")));
         }
 
         mtm.runAtEnd(

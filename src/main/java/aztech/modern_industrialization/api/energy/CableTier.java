@@ -43,9 +43,7 @@ public class CableTier implements Comparable<CableTier> {
     public final String translationKey;
     public final Component englishNameComponent;
 
-    // TODO(Despacito696969): Move turbines and hatches here?
     public CableTier(String englishName, String id, long eu, String englishFullName, BlockDefinition<Block> machineHullDefinintion) {
-        // This also registers text for language datagen
         new CableTierDefinition(englishFullName, englishName, id);
         this.englishName = englishName;
         this.name = id;

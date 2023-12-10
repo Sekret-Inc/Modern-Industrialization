@@ -32,8 +32,6 @@ import aztech.modern_industrialization.machines.components.FluidItemConsumerComp
 import aztech.modern_industrialization.machines.models.MachineCasing;
 import aztech.modern_industrialization.machines.models.MachineCasings;
 
-import java.util.Comparator;
-
 public class SingleBlockSpecialMachines {
 
     public static void init() {

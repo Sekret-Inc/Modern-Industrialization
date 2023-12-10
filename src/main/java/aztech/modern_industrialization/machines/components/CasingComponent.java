@@ -23,15 +23,12 @@
  */
 package aztech.modern_industrialization.machines.components;
 
-import aztech.modern_industrialization.MIBlock;
 import aztech.modern_industrialization.api.energy.CableTier;
 import aztech.modern_industrialization.api.energy.CableTierRegistry;
 import aztech.modern_industrialization.machines.IComponent;
 import aztech.modern_industrialization.machines.MachineBlockEntity;
 import aztech.modern_industrialization.machines.models.MachineCasing;
 import aztech.modern_industrialization.machines.models.MachineCasings;
-import com.google.common.collect.BiMap;
-import com.google.common.collect.HashBiMap;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundSource;
@@ -43,7 +40,6 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import org.jetbrains.annotations.Nullable;
 
