@@ -48,7 +48,7 @@ public class CableTier implements Comparable<CableTier> {
         this.englishName = englishName;
         this.name = id;
         this.eu = eu;
-        this.translationKey = "text." + aztech.modern_industrialization.ModernIndustrialization.MOD_ID + ".cable_tier_" + id;
+        this.translationKey = "text." + aztech.modern_industrialization.ModernIndustrialization.MOD_ID + ".CableTier" + englishName;
         this.englishNameComponent = Component.translatable(translationKey);
         this.machineCasing = MachineCasings.create(id);
         this.machineHull = machineHullDefinintion.asBlock();

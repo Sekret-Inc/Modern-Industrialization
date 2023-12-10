@@ -56,14 +56,12 @@ public abstract class CableTierRegistry {
         }
     }
 
-    public static ArrayList<CableTierEntry> unprocessedTierList;
-    public static ArrayList<CableTier> tierList;
-    public static Map<Block, CableTier> hullToTier;
+    public static ArrayList<CableTierEntry> unprocessedTierList = new ArrayList<>();
+    public static ArrayList<CableTier> tierList = null;
+    public static Map<Block, CableTier> hullToTier = new HashMap<>();
     public static CableTier defaultTier = null;
 
     static {
-        unprocessedTierList = new ArrayList<>();
-        hullToTier = new HashMap<>();
         unprocessedTierList.add(new CableTierEntry("LV", "lv", 32, "Low Voltage", "Basic Machine Hull", "basic_machine_hull", null));
         unprocessedTierList.add(new CableTierEntry("MV", "mv", 32 * 4, "Medium Voltage", "Advanced Machine Hull", "advanced_machine_hull", null));
         unprocessedTierList.add(new CableTierEntry("HV", "hv", 32 * 4 * 8, "High Voltage", "Turbo Machine Hull", "turbo_machine_hull", null));
@@ -138,26 +136,6 @@ public abstract class CableTierRegistry {
         }
         unprocessedTierList = null;
         CableTierRegistry.tierList.sort(Comparator.naturalOrder());
-    }
-
-    // TODO(Despacito696969): Should this be removed?
-    public static void removeTier(String name) {
-        int result = -1;
-        for (int i = 0; i < tierList.size(); ++i) {
-            if (tierList.get(i).name.equals(name)) {
-                result = i;
-                break;
-            }
-        }
-        if (result == -1) {
-            throw new IllegalArgumentException("Cable Tier: " + name + " not found!");
-        }
-
-        if (tierList.get(result).name.equals("lv")) {
-            defaultTier = null;
-        }
-
-        tierList.remove(result);
     }
 
     @Nullable
